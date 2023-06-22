@@ -9,6 +9,7 @@ typedef enum{
 
 int contador = 0;
 estadosMEF_t estadoActual;
+unsigned long tiempoAnterior = 0;
 
 void InicializarMEF(void){
   pinMode(SW1, INPUT);
@@ -30,4 +31,13 @@ void buttonReleased(int16_t tecla){
   Serial.println(tecla);
   Serial.print("Contador de pulsaciones: ");
   Serial.println(contador);
+}
+
+bool espera(unsigned long intervalo){
+  unsigned long milisegundos = millis();
+  if (milisegundos - tiempoAnterior >= intervalo){
+    tiempoAnterior = milisegundos;
+    return true;
+  }
+  return false;
 }
