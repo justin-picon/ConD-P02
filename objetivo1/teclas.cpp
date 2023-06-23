@@ -20,6 +20,44 @@ void InicializarMEF(void){
   Serial.begin(9600);
 }
 
+void ActualizarMEF(void){
+  switch (estadoActual){
+    case BUTTON_UP:
+      if(digitalRead(SW1) == LOW){
+        estadoActual = BUTTON_FALLING;
+      }
+      break;
+    case BUTTON_FALLING:
+      if(espera(RETARDO)){
+        if(digitalRead(SW1) ==  LOW){
+          estadoActual = BUTTON_DOWN;
+          buttonPressed(SW1);
+        }else{
+          estadoActual = BUTTON_UP;
+        }
+      }
+      break;
+    case BUTTON_RISING:
+      if (espera(RETARDO)){
+        if(digitalRead(SW1) == HIGH){
+          estadoActual = BUTTON_UP;
+          buttonReleased(SW1);
+        }else{
+          estadoActual = BUTTON_DOWN;
+        }
+      }
+      break;
+    case BUTTON_DOWN:
+      if(digitalRead(SW1) == HIGH){
+        estadoActual = BUTTON_RISING;
+      }
+      break;
+    default:
+      InicializarMEF();
+      break;
+  }
+}
+
 void buttonPressed(int16_t tecla){
   Serial.print("Se ha presionado la tecla del pin: ");
   Serial.println(tecla);
