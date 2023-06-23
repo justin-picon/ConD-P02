@@ -1,5 +1,9 @@
 #include "main.h"
 
-void setup(){}
+void setup(){
+  InicializarMEF();
+}
 
-void loop(){}
+void loop(){
+  ActualizarMEF();
+}
