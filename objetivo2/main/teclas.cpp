@@ -1,5 +1,7 @@
 #include "teclas.h"
 
+int contador = 0;
+
 void InicializarMEF(dbn_t *dataTeclaN){
   pinMode(dataTeclaN->tecla, INPUT);
 
