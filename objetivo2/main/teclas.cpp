@@ -20,3 +20,11 @@ void buttonReleased(int16_t tecla){
   Serial.print("Contador de pulsaciones: ");
   Serial.println(contador);
 }
+
+void espera(int16_t milisegundos){
+  unsigned long tiempo_actual = 0;
+  tiempo_actual = millis();
+  while (millis() < tiempo_actual + milisegundos){
+    
+  } 
+}
